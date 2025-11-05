@@ -1,49 +1,27 @@
+import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import java.io.*;
+
 
 public class PracticeProblemTest {
 
-   @Test
-   public void testOutput()
-   {
-     PrintStream originalOut = System.out;
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     System.setOut(new PrintStream(bos));
+@Test
+@DisplayName("")
+void fibonacciTest1() {
+    Class<?> testClass = PracticeProblem.class;
+    try {
+        Class<?>[] cArg = {int.class};
+        Method method = testClass.getDeclaredMethod("fib", cArg);
+  // Enter code here
+    assertEquals(0, (int)method.invoke(null, 0));
+}
 
-     // action
-     PracticeProblem.q1();
 
-     // assertion
-     assertEquals("There once was a man from St. Ives.\n", bos.toString());
-
-     // undo the binding in System
-     System.setOut(originalOut);
-   }
-
-   @Test
-   public void testInputandOutput()
-   {
-      String data = "Users Input";
-      System.setIn(new ByteArrayInputStream(data.getBytes()));
-      
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
-
-      // action
-      PracticeProblem.q1();
-
-      // assertion
-      assertEquals("There once was a man from St. Ives.\n", bos.toString());
-
-      // undo the binding in System
-      System.setOut(originalOut);
-   }
-
-   @Test
-   public void testQ3()
-   {
-     
-   }
+    catch (NoSuchMethodException e) {
+        fail("Method does not exist");
+}
+    catch(Exception e) {
+        fail("Something weird happened");
+}
+}
 }
